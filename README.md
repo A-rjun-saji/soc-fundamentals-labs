@@ -1,37 +1,45 @@
 # 🛡️ SOC Fundamentals Labs
 
-> Hands-on SOC labs focused on **attacker behavior**, **detection mindset**, and **real analyst workflows**.  
-> Built to prove practical SOC skills — not tool memorization.
+> Hands-on SOC labs focused on **attacker behavior**, **network & host visibility**, and **real analyst workflows**.  
+> Built to prove **how I think as a SOC analyst**, not what tools I can click.
+
+This repository is designed to demonstrate **practical SOC capability**, not certification prep or tool memorization.
 
 ---
 
 ## 🔍 What This Repository Proves
 
 ✔ Core **SOC L1 fundamentals**  
-✔ Understanding of **network & system behavior**  
-✔ Ability to **translate activity into detections**  
-✔ Analyst thinking beyond alerts and dashboards  
+✔ Understanding of **network, firewall, and endpoint behavior**  
+✔ Ability to **differentiate normal vs suspicious activity**  
+✔ Skill in **correlating attacker, victim, and endpoint evidence**  
+✔ Analyst thinking **beyond alerts, dashboards, and signatures**
 
 This is **not a tutorial repository**.  
-This is **evidence of hands-on SOC capability**.
+This is **evidence of hands-on SOC investigation skills**.
 
 ---
 
 ## 🧪 Lab Environment
 
 | Component | Role |
-|---------|-----|
-| Kali Linux | Attacker / probing |
-| Windows 10 | Enterprise endpoint |
+|--------|------|
+| Kali Linux | Attacker / scanning / probing |
+| Ubuntu Server | Firewall, logging, control point |
+| Windows 11 | Enterprise endpoint / user activity |
+| Windows 10 | Secondary endpoint |
 | Windows 7 | Legacy / high-risk endpoint |
-| Windows 11 + WSL | Linux services / pseudo-C2 |
-| Network | Host-only / NAT (isolated) |
+| Network | Host-only / NAT (isolated lab) |
+
+All traffic and activity is **fully controlled and observable**.
 
 ---
 
 ## 📂 Lab Categories
 
-### 🌐 Networking Fundamentals
+---
+
+### 🌐 Networking Fundamentals  
 📁 `networking/`
 
 **Skills covered**
@@ -50,16 +58,52 @@ Each lab contains:
 
 ---
 
+### 🌐 Network Traffic Analysis  
+📁 `network-traffic-analysis/`
+
+Focuses on **DNS, HTTP, and Firewall traffic** with an emphasis on **behavioral patterns and visibility boundaries**.
+
+**Skills covered**
+- DNS resolution flow and abuse patterns
+- HTTP request behavior and beaconing indicators
+- Firewall ALLOW vs BLOCK interpretation
+- Inbound vs outbound traffic analysis
+- SRC / DST / SPT / DPT field analysis
+- Visibility gaps (what firewalls can and cannot see)
+
+Includes a full **Firewall + Endpoint + Attacker correlation lab** demonstrating:
+- Blocked inbound scans
+- Legitimate internal access
+- Risky allowed outbound traffic
+- Endpoint traffic bypassing firewall visibility
+- SOC-style correlation and decision-making
+
+---
+
+### 🖥️ Endpoint Logging & System Behavior  
+📁 `endpoint-logging-labs/`
+
+Focuses on **host-level visibility** from Windows and Linux systems.
+
+**Skills covered**
+- Windows authentication and process activity
+- Linux authentication and service logs
+- Differentiating system noise from attacker behavior
+- Mapping endpoint activity to network evidence
+
+---
+
 ## 🧠 SOC Analyst Mindset
 
 Instead of asking:
-> “Which tool is this?”
+> “Which tool detected this?”
 
 I focus on:
-- Why this behavior is suspicious
+- Why this behavior exists
+- Whether it is normal for this system
 - How attackers abuse normal services
-- What this looks like in logs
-- How a SOC would detect or miss it
+- What this looks like across **firewall + endpoint + network**
+- How a SOC would detect it — or miss it
 
 ---
 
@@ -67,24 +111,30 @@ I focus on:
 
 Most resumes list tools.
 
-This repository shows:
-- **How I think**
-- **What I investigate**
-- **Why behavior matters**
-- **How activity maps to detection**
+This repository demonstrates:
+- **How I investigate**
+- **How I correlate evidence**
+- **How I reason about traffic**
+- **How I distinguish signal from noise**
+- **How behavior maps to detection logic**
 
 ---
 
 ## 📈 Progress Model
 
 Labs are added **incrementally**, grouped by skill domain:
-- Networking
-- DNS & HTTP
-- Windows & Linux logs
-- Detection logic
-- SIEM correlation (future)
+- Networking fundamentals
+- DNS & HTTP analysis
+- Firewall traffic & visibility
+- Windows & Linux logging
+- Detection logic & correlation
+- SIEM-based detection (future)
 
-Each lab is **complete, documented, and reproducible**.
+Each lab is:
+- Complete
+- Documented
+- Reproducible
+- Interview-defensible
 
 ---
 
@@ -95,8 +145,4 @@ All activities are conducted:
 - On self-owned virtual machines
 - For educational and defensive purposes only
 
-No production systems are involved.
-
----
-
-
+No production systems or external targets are involved.
