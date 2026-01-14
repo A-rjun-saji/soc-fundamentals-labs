@@ -3,20 +3,37 @@
 > Hands-on SOC labs focused on **attacker behavior**, **network & host visibility**, and **real analyst workflows**.  
 > Built to prove **how I think as a SOC analyst**, not what tools I can click.
 
-This repository is designed to demonstrate **practical SOC capability**, not certification prep or tool memorization.
+This repository demonstrates **practical SOC capability** through controlled labs covering **networking, endpoint logging, SIEM foundations, and identity telemetry**.
+
+This is **not certification prep**.  
+This is **evidence of analyst thinking**.
 
 ---
 
 ## 🔍 What This Repository Proves
 
 ✔ Core **SOC L1 fundamentals**  
-✔ Understanding of **network, firewall, and endpoint behavior**  
+✔ Understanding of **network, firewall, endpoint, and identity behavior**  
 ✔ Ability to **differentiate normal vs suspicious activity**  
-✔ Skill in **correlating attacker, victim, and endpoint evidence**  
-✔ Analyst thinking **beyond alerts, dashboards, and signatures**
+✔ Skill in **correlating attacker, victim, endpoint, and SIEM evidence**  
+✔ Analyst reasoning **beyond alerts, dashboards, and signatures**
 
-This is **not a tutorial repository**.  
-This is **evidence of hands-on SOC investigation skills**.
+This is **not a tutorial dump**.  
+This is **proof of hands-on SOC investigation skills**.
+
+---
+
+## 🧠 Core Philosophy
+
+> **Logs are evidence — not decorations.**  
+> If log generation is wrong, detection is impossible.
+
+This repository prioritizes:
+- Correct **log generation** before ingestion
+- Clean **signal over noise**
+- Logical **data separation**
+- Evidence-driven **validation**
+- SOC reasoning before automation
 
 ---
 
@@ -25,17 +42,37 @@ This is **evidence of hands-on SOC investigation skills**.
 | Component | Role |
 |--------|------|
 | Kali Linux | Attacker / scanning / probing |
-| Ubuntu Server | Firewall, logging, control point |
+| Ubuntu Server | SIEM, firewall, logging, control point |
 | Windows 11 | Enterprise endpoint / user activity |
-| Windows 10 | Secondary endpoint |
-| Windows 7 | Legacy / high-risk endpoint |
-| Network | Host-only / NAT (isolated lab) |
+| Windows 10 | Endpoint telemetry |
+| Windows Server 2019 | Active Directory / identity authority |
+| Network | Host-only + NAT (isolated lab) |
 
-All traffic and activity is **fully controlled and observable**.
+All activity is **fully controlled and observable**.
 
 ---
 
-## 📂 Lab Categories
+## 📂 Repository Structure
+
+soc-fundamentals-labs/
+│
+├── SOC-SIEM-Learning/
+│ ├── Foundations/
+│ └── SIEM_Setup/
+│ ├── SOC SIEM LAB-SETUP.docx
+│ ├── SPLUNK ENTERPRISE SETUP AND LINUX LOG INGESTION.docx
+│ ├── SPLUNK FORWARDER SETUP & WINDOWS 10 ENDPOINT LOG INGESTION.docx
+│ └── SPLUNK FORWARDER SETUP & WINDOWS SERVER 2019 (AD).docx
+│
+├── networking/
+├── network-traffic-analysis/
+├── endpoint-logging-labs/
+└── README.md
+
+
+---
+
+## 🧪 Lab Categories
 
 ---
 
@@ -48,7 +85,7 @@ All traffic and activity is **fully controlled and observable**.
 - Trusted port abuse (443 ≠ HTTPS)
 - Netcat usage (C2-style communication)
 
-Each lab contains:
+Each lab includes:
 - 🎯 Objective  
 - 🧱 Lab setup  
 - ⚙️ Commands executed  
@@ -61,35 +98,83 @@ Each lab contains:
 ### 🌐 Network Traffic Analysis  
 📁 `network-traffic-analysis/`
 
-Focuses on **DNS, HTTP, and Firewall traffic** with an emphasis on **behavioral patterns and visibility boundaries**.
+Focuses on **DNS, HTTP, and firewall traffic** with emphasis on **behavioral patterns and visibility boundaries**.
 
 **Skills covered**
-- DNS resolution flow and abuse patterns
-- HTTP request behavior and beaconing indicators
+- DNS resolution and abuse
+- HTTP behavior and beaconing indicators
 - Firewall ALLOW vs BLOCK interpretation
 - Inbound vs outbound traffic analysis
 - SRC / DST / SPT / DPT field analysis
 - Visibility gaps (what firewalls can and cannot see)
 
-Includes a full **Firewall + Endpoint + Attacker correlation lab** demonstrating:
-- Blocked inbound scans
-- Legitimate internal access
-- Risky allowed outbound traffic
-- Endpoint traffic bypassing firewall visibility
-- SOC-style correlation and decision-making
+Includes **attacker + firewall + endpoint correlation labs**.
 
 ---
 
 ### 🖥️ Endpoint Logging & System Behavior  
 📁 `endpoint-logging-labs/`
 
-Focuses on **host-level visibility** from Windows and Linux systems.
+Focuses on **host-level visibility**.
 
 **Skills covered**
 - Windows authentication and process activity
 - Linux authentication and service logs
 - Differentiating system noise from attacker behavior
-- Mapping endpoint activity to network evidence
+- Mapping endpoint behavior to network evidence
+
+---
+
+### 🧠 SIEM Foundations & Identity Telemetry (Splunk)
+📁 `SOC-SIEM-Learning/SIEM_Setup/`
+
+This section demonstrates **how SOC telemetry is built correctly**, not just collected.
+
+#### Labs included
+
+**1️⃣ SOC SIEM Lab Setup**
+- Phase-based VM design
+- RAM-optimized execution (8 GB & 16 GB modes)
+- Correct install order (Linux → Windows → AD)
+
+**2️⃣ Splunk Enterprise + Linux Logs**
+- Splunk Enterprise on Ubuntu (CLI only)
+- Agentless ingestion of Linux auth & system logs
+- Data validation before use
+
+Indexes:
+- `linux`
+
+**3️⃣ Windows 10 Endpoint Telemetry**
+- Advanced Audit Policy (correctly configured)
+- Authentication, privilege, and process visibility
+- Splunk Universal Forwarder validation
+
+Indexes:
+- `windows`
+
+**4️⃣ Active Directory Identity Telemetry**
+- Minimal AD deployment
+- Credential validation & identity decisions
+- Proper isolation of DC telemetry
+
+Indexes:
+- `ad`
+
+Critical principle:
+> No forwarder on the Domain Controller = no AD investigation.
+
+---
+
+## 🚦 How to Use This Repository
+
+Follow this order:
+1. Networking fundamentals  
+2. Network traffic analysis  
+3. Endpoint logging  
+4. SIEM foundations (Linux → Windows → AD)
+
+Skipping steps = broken understanding.
 
 ---
 
@@ -101,9 +186,9 @@ Instead of asking:
 I focus on:
 - Why this behavior exists
 - Whether it is normal for this system
-- How attackers abuse normal services
-- What this looks like across **firewall + endpoint + network**
-- How a SOC would detect it — or miss it
+- How attackers abuse legitimate services
+- What visibility exists (and what doesn’t)
+- How SOCs detect — or miss — this activity
 
 ---
 
@@ -116,7 +201,7 @@ This repository demonstrates:
 - **How I correlate evidence**
 - **How I reason about traffic**
 - **How I distinguish signal from noise**
-- **How behavior maps to detection logic**
+- **How detection logic is built from behavior**
 
 ---
 
@@ -124,11 +209,11 @@ This repository demonstrates:
 
 Labs are added **incrementally**, grouped by skill domain:
 - Networking fundamentals
-- DNS & HTTP analysis
-- Firewall traffic & visibility
-- Windows & Linux logging
-- Detection logic & correlation
-- SIEM-based detection (future)
+- Traffic analysis
+- Endpoint telemetry
+- SIEM foundations
+- Identity-centric investigation
+- Detection logic (future)
 
 Each lab is:
 - Complete
